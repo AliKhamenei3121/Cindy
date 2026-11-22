@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,6 +57,7 @@ HTML
 </style>
 </head>
 <body>
+<audio id="musica" src="Gil Mora Belanova - Baila mi corazón (letra).mp3" loop preload="auto"></audio>
 <canvas id="c" aria-label="Ramo de lirios rojos en 3D"></canvas>
 <aside id="dedic">
   <button id="reveal">Presiona aquí</button>
@@ -73,6 +73,7 @@ HTML
 <script>
 (() => {
   const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  const musica = document.getElementById('musica');
   const R = (a, b) => a + Math.random() * (b - a);
   const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -344,10 +345,12 @@ HTML
   document.getElementById('again').onclick = () => { T = 0; rotY = 0; document.getElementById('dedic').classList.remove('on', 'show'); };
   addEventListener('resize', resize);
  
-  document.getElementById('reveal').onclick = () => document.getElementById('dedic').classList.add('show');
+  document.getElementById('reveal').onclick = () => {
+    document.getElementById('dedic').classList.add('show');
+    musica.play().catch(() => {});
+  };
   resize(); build(); buildFillers(); requestAnimationFrame(frame);
 })();
 </script>
 </body>
 </html>
- 
